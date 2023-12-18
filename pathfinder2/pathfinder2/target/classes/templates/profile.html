@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Profile</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+</head>
+<body>
+    <div class="profile-container">
+        <h2>User Profile</h2>
+
+        <div class="profile-info">
+            <p><strong>Name:</strong> <span th:text="${profile.name}">Name</span></p>
+            <p><strong>Email:</strong> <span th:text="${profile.email}">Email</span></p>
+            <p><strong>Phone Number:</strong> <span th:text="${profile.phoneNumber}">Phone Number</span></p>
+            <p><strong>Interests:</strong> <span th:text="${profile.interests}">Interests</span></p>
+            <p><strong>Courses Registered:</strong> <span th:text="${profile.coursesRegistered}">Courses</span></p>
+        </div>
+
+        <form th:action="@{/dashboard}" method="get">
+            <button type="submit" class="dashboard-button">Back to Dashboard</button>
+        </form>
+    </div>
+</body>
+</html>

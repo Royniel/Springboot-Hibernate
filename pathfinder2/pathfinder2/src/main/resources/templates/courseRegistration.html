@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Course Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .form-container {
+            background: linear-gradient(to right, #36D1DC, #5B86E5);
+            margin: 2rem auto;
+            padding: 2rem;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        select, 
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .checkbox-group, .radio-group {
+            margin-bottom: 10px;
+        }
+        input[type="checkbox"],
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+        button {
+            background-color: #0056b3;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #004494;
+        }
+        .back-button {
+            background-color: #d3d3d3;
+            margin-top: 10px;
+        }
+        .course-list {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .course-item {
+            margin-bottom: 5px;
+            padding: 5px;
+            border-bottom: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Course Registration</h1>
+
+    <form th:action="@{/courseRegistrationSubmit}" th:object="${courseRegistration}" method="post">
+
+        <label for="educationLevel">Level of Education:</label>
+        <select id="educationLevel" th:field="*{educationLevel}">
+            <option value="Graduation">Graduation</option>
+            <option value="PostGraduation">PostGraduation</option>
+            <option value="HighSchool">High School</option>
+            <option value="Diploma">Diploma</option>
+        </select><br/>
+
+        <label for="fieldOfEducation">Field of Education:</label>
+        <select id="fieldOfEducation" th:field="*{fieldOfEducation}">
+            <option value="Arts">Arts</option>
+            <option value="Science">Science</option>
+            <option value="Law">Law</option>
+            <option value="Technology">Technology</option>
+            <option value="Commerce">Commerce</option>
+        </select><br/>
+
+        <label for="interests">Interests:</label><br/>
+        <input type="checkbox" id="science" name="interests" value="Science">
+        <label for="science">Science</label><br/>
+        <input type="checkbox" id="arts" name="interests" value="Arts">
+        <label for="arts">Arts</label><br/>
+        <input type="checkbox" id="law" name="interests" value="Law">
+        <label for="law">Law</label><br/>
+        <input type="checkbox" id="technology" name="interests" value="Technology">
+        <label for="technology">Technology</label><br/>
+        <input type="checkbox" id="commerce" name="interests" value="Commerce">
+        <label for="commerce">Commerce</label><br/>
+
+        <label for="purpose">Purpose of the Course:</label>
+        <select id="purpose" th:field="*{purpose}">
+            <option value="Diploma">Diploma</option>
+            <option value="CrashCourse">Crash Course</option>
+            <option value="LearningBasics">Learning Basics</option>
+            <option value="Job">Job</option>
+        </select><br/>
+
+        <label>Duration of the Course:</label><br/>
+        <input type="radio" id="threeMonths" name="duration" value="3 Months">
+        <label for="threeMonths">3 Months</label><br/>
+        <input type="radio" id="sixMonths" name="duration" value="6 Months">
+        <label for="sixMonths">6 Months</label><br/>
+        <input type="radio" id="oneYear" name="duration" value="1 Year">
+        <label for="oneYear">1 Year</label><br/>
+
+        <button type="submit">Submit</button>
+    </form>
+        
+        <form th:action="@{/backtodashboard}" method="post">
+            <button type="submit" class="back-button">Back To Dashboard</button>
+        </form>
+    </div>
+    <div class="form-container course-list" th:if="${not #lists.isEmpty(matchingCourses)}">
+        <h2>Suggested Courses</h2>
+        <div th:each="course : ${matchingCourses}" class="course-item">
+            <span th:text="${course.name}">Course Name</span>
+            <!-- Add more details if needed -->
+        </div>
+    </div>
+
+    <div class="form-container" th:if="${#lists.isEmpty(matchingCourses)}">
+        <p>No courses found matching your criteria.</p>
+    </div>
+</body>
+</html>

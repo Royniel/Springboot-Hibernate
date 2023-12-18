@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(to right, #3494e6, #ec6ead);
+            color: #fff;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card {
+            width: 60%;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .btn {
+            background-color: #ff7e5f;
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 0;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #ff5579;
+        }
+    </style>
+</head>
+<body>
+    <div class="card text-center">
+        <h2 class="mb-4">Dashboard</h2>
+        
+        <form th:action="@{/courseRegistrationDash}" method="post" th:object="${dashboard}">
+            <button type="submit" class="btn btn-primary btn-block mb-2">Register For New Course</button>
+        </form>
+        <form th:action="@{/existingCoursesDash}" method="post" th:object="${dashboard}">
+            <button type="submit" class="btn btn-primary btn-block mb-2">See Existing Registered Courses</button>
+            </form>
+            
+            <form th:action="@{/profileDash}" method="post" th:object="${dashboard}">
+            <button type="submit" class="btn btn-primary btn-block mb-2">Profile Check</button>
+            </form>
+            
+            <form th:action="@{/login}" method="post" th:object="${dashboard}">
+            <button type="submit" class="btn btn-danger btn-block">Logout</button>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS and dependencies (you can include them at the end of your body for better performance) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Existing Courses</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        select, option {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        .course {
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+        }
+        .course:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Existing Courses</h2>
+        <form th:action="@{/existingCourses}" method="get">
+            <select name="category">
+                <option value="">Select a Category</option>
+                <option value="Accounts">Accounts</option>
+                <option value="Economics">Economics</option>
+                <option value="Finance">Finance</option>
+                <option value="Physics">Physics</option>
+                <option value="Mathematics">Mathematics</option>
+                <option value="Computer Science">Computer Science</option>
+                <option value="Law">Law</option>
+                <option value="Media">Media</option>
+                <option value="Animation">Animation</option>
+                
+            </select>
+				
+            <button type="submit">Filter</button>
+            
+        	</form>
+        	
+        	 <div th:each="course : ${courses}" class="course">
+            <p>Name: <span th:text="${course.name}"></span></p>
+            <p>Category: <span th:text="${course.category}"></span></p>
+            <p>Duration: <span th:text="${course.duration}"></span></p>
+        </div>
+        	  <form th:action="@{/existingCoursesAll}" method="post">
+            <br><br><button type="submit">Get All Courses</button>
+        	</form >
+        
+            <form th:action="@{/backtodash}" method="post">
+            <br><br><button type="submit">Back To Dashboard</button>
+        	</form >
+       
+    </div>
+</body>
+</html>
